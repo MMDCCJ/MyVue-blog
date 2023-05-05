@@ -1,10 +1,10 @@
 <template>
     <div id="intro">
         <p>{{ welcomeMsg }}</p>
-        <a href="">
+        <a href="" id="toMain">
             <p class="el-icon-bottom"></p>
         </a>
-        
+
     </div>
 </template>
 <script>
@@ -34,4 +34,35 @@ p {
     font-size: 35px;
 }
 
+.toMain {
+    border: 2px solid black;
+    /* 设置边框 */
+    border-radius: 50%;
+    /* 将边框设置为圆形 */
+    padding: 10px;
+    /* 设置内边距 */
+}
+
+@media screen and (max-width:1100px) {
+    p {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    #intro>p {
+        display: none;
+    }
+}
+@media screen and (max-width:800px) {
+    #intro>a {
+        display: none;
+    }
+}
+
+@media screen and (max-height:700px){
+    #intro {
+        height: 60vh;
+    }
+}
 </style>
