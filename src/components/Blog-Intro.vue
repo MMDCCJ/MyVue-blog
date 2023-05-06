@@ -34,16 +34,9 @@ p {
     font-size: 35px;
 }
 
-.toMain {
-    border: 2px solid black;
-    /* 设置边框 */
-    border-radius: 50%;
-    /* 将边框设置为圆形 */
-    padding: 10px;
-    /* 设置内边距 */
-}
 
-@media screen and (max-width:1100px) {
+
+/* @media screen and (max-width:1100px) {
     p {
         font-size: 25px;
     }
@@ -64,5 +57,5 @@ p {
     #intro {
         height: 60vh;
     }
-}
+} */
 </style>
