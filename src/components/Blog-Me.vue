@@ -1,7 +1,9 @@
 <template>
     <div id="me">
-        <h1>MMDCCJ</h1>
-        <p>我站在你左侧，却像隔着银河</p>
+        <div id="top">
+            <h1>MMDCCJ</h1>
+            <p>我站在你左侧，却像隔着银河</p>
+        </div>
         <div id="contact">
             <a href=";" title="邮箱"><i class="el-icon-message"></i></a>
             <a href="https://github.com/MMDCCJ" id="github" title="github">
@@ -22,19 +24,26 @@ export default {
 <style lang='css' scoped>
 #me {
     /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
-    width: 80vh;
-    height: 25vh;
+    width: 55rem;
+    height: 15rem;
     border: 1px solid white;
-    margin: 20vh auto 5vh;
+    margin: 10rem auto 5rem;
+    display: flex;
+    flex-direction: column;
 }
-
+#top{
+    flex: 7;
+    box-sizing: border-box;
+}
 #contact {
-    margin-left: 5vh;
-    margin-top: 4vh;
+    margin-left: 5rem;
+    /* margin-top: 4rem; */
+    flex: 3;
+    /* line-height: 6rem; */
 }
 
 #contact>a {
-    margin-right: 2vh;
+    margin-right: 2rem;
 }
 
 #github {
@@ -43,19 +52,21 @@ export default {
 }
 
 h1 {
-    margin-left: 5vh;
+    
+    margin-left: 5rem;
     color: white;
-    font-size: 28px;
+    font-size: 29px;
+    margin-bottom: 2.5rem;
 }
 
 i {
     color: white;
     font-size: 34px;
-
 }
 
 p {
-    margin-left: 5vh;
+    margin-left: 5rem;
     color: gray;
+    font-size: 19px;
 }
 </style>

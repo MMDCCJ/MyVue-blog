@@ -1,5 +1,5 @@
 <template>
-   <div id="container">
+   <div id="maincontainer">
       <B_article/>
    </div>
 </template>
@@ -34,8 +34,7 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-#container{
-   margin-top: 2vh;
+#maincontainer{
 }
 
  

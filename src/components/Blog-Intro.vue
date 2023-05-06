@@ -1,8 +1,8 @@
 <template>
     <div id="intro">
         <p>{{ welcomeMsg }}</p>
-        <a href="" id="toMain">
-            <p class="el-icon-bottom"></p>
+        <a href="#me" id="toMain">
+            <p class="el-icon-bottom float-element"></p>
         </a>
 
     </div>
@@ -22,7 +22,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 80rem;
     flex-direction: column;
     /* 设置容器高度以实现垂直居中 */
 }
@@ -34,15 +34,29 @@ p {
     font-size: 35px;
 }
 
+@keyframes float-up-down {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 
+.float-element {
+  animation: float-up-down 1.65s infinite;
+}
 
-/* @media screen and (max-width:1100px) {
-    p {
-        font-size: 25px;
+@media screen and (max-width:1600px) {
+    #intro{
+        height: 40rem;
     }
 }
 
-@media screen and (max-width:1000px) {
+/* @media screen and (max-width:1000px) {
     #intro>p {
         display: none;
     }
@@ -57,5 +71,5 @@ p {
     #intro {
         height: 60vh;
     }
-} */
+}  */
 </style>

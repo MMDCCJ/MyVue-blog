@@ -45,5 +45,8 @@ body{
   background-repeat:no-repeat;
   background-color: #130f0c;
 }
+html{
+  scroll-behavior: smooth;
+}
 
 </style>
