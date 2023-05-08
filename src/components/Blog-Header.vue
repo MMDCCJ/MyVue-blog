@@ -8,7 +8,6 @@
     </el-col>
   </el-row>
 </template>
-
 <script>
 export default {
   name: 'Blog-Header',

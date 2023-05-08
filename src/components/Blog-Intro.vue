@@ -4,7 +4,6 @@
         <a href="#me" id="toMain">
             <p class="el-icon-bottom float-element"></p>
         </a>
-
     </div>
 </template>
 <script>
@@ -24,16 +23,14 @@ export default {
     align-items: center;
     height: 80rem;
     flex-direction: column;
-    /* 设置容器高度以实现垂直居中 */
 }
-
 p {
     position: relative;
     color: white;
     opacity: 0.8;
     font-size: 35px;
 }
-
+/* 箭头上下浮动动画效果 */
 @keyframes float-up-down {
   0% {
     transform: translateY(0);

@@ -2,12 +2,12 @@
   <div id="app">
     <el-container>
       <el-header>
-        <B_Header/>
+        <B_Header />
       </el-header>
       <el-main>
-        <B_Intro/>
-        <B_Me/>
-        <B_Main/>
+        <B_Intro />
+        <B_Me />
+        <B_Main />
       </el-main>
     </el-container>
   </div>
@@ -26,6 +26,15 @@ export default {
     B_Main,
     B_Me
   },
+  created() {
+    // 获取名言
+    this.$http.get('http://www.mmdccj.xyz/api/sayings').then(function (res) {
+      console.log(res);
+    }, function () {
+      console.log('请求失败处理');
+    });
+  }
+  ,
   data() {
     return {
       radio: '1'
@@ -35,18 +44,19 @@ export default {
 </script>
 
 <style>
-#app{
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  
-}
-body{
-  background-image: url('../public/main.jpg');
-  background-size:100% ;
-  background-repeat:no-repeat;
-  background-color: #130f0c;
-}
-html{
-  scroll-behavior: smooth;
+#app {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+
 }
 
+body {
+  background-image: url('../public/mainzip.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #130f0c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 </style>

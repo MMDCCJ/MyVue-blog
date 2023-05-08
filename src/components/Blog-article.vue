@@ -36,8 +36,10 @@ export default {
 
     },
     methods: {
-
-    }
+        toArticle(){
+            // 路由到文章详情
+        }
+    },
 };
 </script>
 <style lang='css' scoped>
@@ -73,5 +75,5 @@ p {
     text-align: right;
     margin-right: 5rem;
     font-size: 12px;
-}
+    }
 </style>
