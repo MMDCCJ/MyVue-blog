@@ -25,20 +25,20 @@ export default {
 #me {
     width: 55rem;
     height: 15rem;
-    border: 1px solid white;
-    margin: 10rem auto 5rem;
+    /* border: 1px solid white; */
+    margin: 4rem auto 5rem;
     display: flex;
     flex-direction: column;
 }
-#top{
+
+#top {
     flex: 7;
     box-sizing: border-box;
 }
+
 #contact {
     margin-left: 5rem;
-    /* margin-top: 4rem; */
     flex: 3;
-    /* line-height: 6rem; */
 }
 
 #contact>a {
@@ -51,7 +51,6 @@ export default {
 }
 
 h1 {
-    
     margin-left: 5rem;
     color: white;
     font-size: 29px;
@@ -67,5 +66,4 @@ p {
     margin-left: 5rem;
     color: gray;
     font-size: 19px;
-}
-</style>
+}</style>

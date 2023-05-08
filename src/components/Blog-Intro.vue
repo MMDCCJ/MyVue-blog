@@ -1,6 +1,6 @@
 <template>
     <div id="intro">
-        <p>{{ welcomeMsg }}</p>
+        <p>"{{ welcomeMsg.saying }}" --{{ welcomeMsg.speaker }}</p>
         <a href="#me" id="toMain">
             <p class="el-icon-bottom float-element"></p>
         </a>
@@ -9,9 +9,23 @@
 <script>
 export default {
     name: 'Blog-intro',
-    data() {
-        return {
-            welcomeMsg: '"Cogito, ergo sum." —— 笛卡尔 (René Descartes)'
+
+    computed: {
+        welcomeMsg() {
+            let msg = JSON.parse(localStorage.getItem('sayings'));
+            if (!msg) {
+                // api失效时默认标语
+                msg = {
+                    saying: 'Cogito, ergo sum.',
+                    speaker: '笛卡尔 (René Descartes)'
+                }
+            } else {
+                // 获取随机标语
+                let id = Math.random(5) * 4;
+                id = Math.floor(id);
+                msg = msg[id];
+            }
+            return msg
         }
     }
 };
@@ -24,31 +38,35 @@ export default {
     height: 80rem;
     flex-direction: column;
 }
+
 p {
     position: relative;
     color: white;
     opacity: 0.8;
     font-size: 35px;
 }
+
 /* 箭头上下浮动动画效果 */
 @keyframes float-up-down {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .float-element {
-  animation: float-up-down 1.65s infinite;
+    animation: float-up-down 1.65s infinite;
 }
 
-@media screen and (max-width:1600px) {
-    #intro{
+@media screen and (max-width:1700px) {
+    #intro {
         height: 40rem;
     }
 }
