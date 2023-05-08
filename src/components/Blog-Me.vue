@@ -23,7 +23,6 @@ export default {
 </script>
 <style lang='css' scoped>
 #me {
-    /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
     width: 55rem;
     height: 15rem;
     border: 1px solid white;

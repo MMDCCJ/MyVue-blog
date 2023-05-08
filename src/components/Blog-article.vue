@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         toArticle(){
-            location.href = ''
+            // 路由到文章详情
         }
     },
 };
