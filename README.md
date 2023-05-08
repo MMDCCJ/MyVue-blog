@@ -1,18 +1,22 @@
-# vue-blog
+# vue-blog 
 
-## To Do
-完成me页面
-## Project setup
+## ToDo
+- 完成me页面 ✅
+- 文章详细页
+- 完成页面路由
+- 完善主页
+- 服务器编写
+## 项目初始化
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 开发下的编译与热重载
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
@@ -21,6 +25,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

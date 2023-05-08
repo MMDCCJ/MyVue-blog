@@ -40,7 +40,7 @@ export default {
   
 }
 body{
-  background-image: url('../public/main.jpg');
+  background-image: url('../public/mainzip.jpg');
   background-size:100% ;
   background-repeat:no-repeat;
   background-color: #130f0c;
