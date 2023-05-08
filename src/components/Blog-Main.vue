@@ -34,8 +34,5 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-#maincontainer{
-}
 
- 
 </style>

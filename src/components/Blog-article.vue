@@ -36,8 +36,10 @@ export default {
 
     },
     methods: {
-
-    }
+        toArticle(){
+            location.href = ''
+        }
+    },
 };
 </script>
 <style lang='css' scoped>
@@ -73,5 +75,5 @@ p {
     text-align: right;
     margin-right: 5rem;
     font-size: 12px;
-}
+    }
 </style>
