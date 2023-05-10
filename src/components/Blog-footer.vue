@@ -1,6 +1,9 @@
 <template>
     <div class="b_footer">
-        <p><a href="https://github.com/MMDCCJ" class="mmdccj">@MMDCCJ</a> 的 Blog <a href=";" class="mmdccj"> 0.1.1</a></p>
+        <p>
+            <a href="https://github.com/MMDCCJ" class="mmdccj" title="MMDCCJ的github">@MMDCCJ</a> 的 Blog
+            <a href=";" class="mmdccj" title="赚到"> 0.1.1</a>
+        </p>
     </div>
 </template>
 <script>
@@ -40,7 +43,8 @@ export default {
     line-height: 3rem;
 
 }
-.mmdccj{
+
+.mmdccj {
     text-decoration: none;
     color: white;
 }
