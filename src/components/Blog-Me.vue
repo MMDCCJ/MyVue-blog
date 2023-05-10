@@ -5,7 +5,7 @@
             <p>我站在你左侧，却像隔着银河</p>
         </div>
         <div id="contact">
-            <a href=";" title="邮箱"><i class="el-icon-message"></i></a>
+            <a @click="email" title="邮箱"><i class="el-icon-message"></i></a>
             <a href="https://github.com/MMDCCJ" id="github" title="github">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-github"
                     viewBox="0 0 16 16">
@@ -30,6 +30,19 @@
 <script>
 export default {
     name: 'Blog-Me',
+    methods: {
+        email() {
+            this.$alert('邮箱', '654371320@qq.com', {
+                confirmButtonText: '确定',
+                callback: action => {
+                    this.$message({
+                        type: 'info',
+                        message: `action: ${action}`
+                    });
+                }
+            });
+        }
+    }
 };
 </script>
 <style lang='css' scoped>
@@ -77,4 +90,5 @@ p {
     margin-left: 5rem;
     color: gray;
     font-size: 19px;
-}</style>
+}
+</style>
