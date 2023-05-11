@@ -34,10 +34,10 @@ export default {
         email() {
             this.$alert('邮箱', '654371320@qq.com', {
                 confirmButtonText: '确定',
-                callback: action => {
+                callback: () => {
                     this.$message({
                         type: 'info',
-                        message: `action: ${action}`
+                        message: `居然真的有人在看邮箱，酷诶`
                     });
                 }
             });
