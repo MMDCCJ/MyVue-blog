@@ -9,6 +9,7 @@
         <router-view name="me"/>
         <router-view name="main"/>
         <router-view name="article"/>
+        <router-view name="editing"/>
         <!-- <B_Main /> -->
       </el-main>
       <el-footer>
@@ -36,10 +37,18 @@ export default {
     if (!localStorage.getItem("sayings")) {
       this.$http.get('http://www.mmdccj.xyz/api/sayings').then(function (res) {
         localStorage.setItem("sayings", JSON.stringify(res.body.data));
-      }, function () {
-        console.log('请求失败处理');
+      }, function (error) {
+        console.log('请求失败',error);
       });
     }
+    // 获取全部文章
+    this.$http.get("127.0.0.1/api/article/overview",{
+      page:1
+    }).then(function(res){
+      console.log(res.body.data);
+    },function(error){
+      console.log("请求失败",error);
+    })
   }
   ,
   data() {

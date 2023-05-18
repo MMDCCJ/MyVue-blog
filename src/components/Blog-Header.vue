@@ -8,6 +8,9 @@
         <el-menu-item index="2" @click="toArticlePage">
           <a> 其 他 </a>
         </el-menu-item>
+        <el-menu-item index="3" @click="toEditing">
+          <a> 文 章 编 辑 </a>
+        </el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
@@ -22,13 +25,23 @@ export default {
     }
   },
   methods: {
+    toEditing() {
+      if (this.$route.name !== "editing") {
+        this.$router.push({
+          name: 'editing',
+        })
+      }
+    }
+    ,
     toTopic() {
+      // 页面滚动
       this.toMain()
       this.$nextTick(() => {
         this.$bus.$emit("toTopic")
       })
     },
     toMain() {
+      // 文章主界面
       if (this.$route.name !== "main") {
         this.$router.push({
           name: 'main',

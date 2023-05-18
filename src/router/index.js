@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import blog_articlepage from '../pages/Blog-ArticlePage'
 import blog_main from "../pages/Blog-Main"
 import blog_me from '../pages/Blog-Me'
+import blog_edite from '../pages/Blog-Article-Editing.vue'
 export default new VueRouter({
     routes:[
         {
@@ -19,6 +20,13 @@ export default new VueRouter({
                 article:blog_articlepage
             },
             props:true
+        },
+        {
+            name:"editing",
+            path:'/editing',
+            components:{
+                editing:blog_edite
+            }
         }
     ]
 })
