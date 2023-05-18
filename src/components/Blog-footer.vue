@@ -2,7 +2,7 @@
     <div class="b_footer">
         <p>
             <a href="https://github.com/MMDCCJ" class="mmdccj" title="MMDCCJ的github">@MMDCCJ</a> 的 Blog
-            <a href=";" class="mmdccj" title="赚到"> 0.1.1</a>
+            <a href=";" class="mmdccj" title="版本号"> 0.1.1</a>
         </p>
     </div>
 </template>

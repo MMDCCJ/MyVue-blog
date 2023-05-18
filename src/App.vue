@@ -6,30 +6,29 @@
       </el-header>
       <el-main>
         <B_Intro />
-        <B_Me />
-        <B_Main />
+        <router-view name="me"/>
+        <router-view name="main"/>
+        <router-view name="article"/>
+        <!-- <B_Main /> -->
       </el-main>
       <el-footer>
         <B_footer/>
       </el-footer>
     </el-container>
-    <el-backtop  :visibility-height="500"></el-backtop>
+    <!-- toTop -->
+    <el-backtop :visibility-height="500"></el-backtop> 
   </div>
 </template>
 
 <script>
 import B_Header from './components/Blog-Header.vue'
 import B_Intro from './components/Blog-Intro.vue'
-import B_Main from './components/Blog-Main.vue'
-import B_Me from './components/Blog-Me.vue'
 import B_footer from './components/Blog-footer.vue'
 export default {
   name: 'App',
   components: {
     B_Header,
     B_Intro,
-    B_Main,
-    B_Me,
     B_footer
   },
   created() {
@@ -47,6 +46,8 @@ export default {
     return {
       radio: '1'
     }
+  },
+  mounted(){
   }
 }
 </script>

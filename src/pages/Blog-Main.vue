@@ -1,14 +1,10 @@
 <template>
    <div id="maincontainer">
       <B_article/>
-      <B_article/>
-      <B_article/>
-      <B_article/>
-      <B_article/>
    </div>
 </template>
 <script>
-import B_article from './Blog-article.vue'
+import B_article from '../components/Blog-article.vue'
 export default {
    name: 'Blog-Main',
    components: {

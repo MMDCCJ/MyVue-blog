@@ -1,11 +1,11 @@
 <template>
-    <div id="container">
+    <div id="container" @click="toArticle" >
         <div id="title">
             <h1>测试文章</h1>
         </div>
         <!-- <img src="../../public/main.jpg" alt=""> -->
         <div id="preview">
-            <p>这可能是一段测试文本这可能是一段测试文本这可能是一段测试文本</p>
+            <p>这现在是一段可以跳转的文本</p>
         </div>
 
         <p id="time">发布事件&nbsp; 2022-03-05 &nbsp;最后更新时间&nbsp; 2023-01-11</p>
@@ -17,13 +17,12 @@ export default {
     components: {
 
     },
-    mixins: [],
     props: {
 
     },
     data() {
         return {
-
+            id:1
         }
     },
     computed: {
@@ -36,8 +35,14 @@ export default {
 
     },
     methods: {
-        toArticle(){
+        toArticle() {
             // 路由到文章详情
+            this.$router.push({
+                name: 'article',
+                params: {
+                    id:this.id
+                }
+            })
         }
     },
 };
@@ -59,6 +64,7 @@ img {
 h1,
 p {
     margin-left: 5rem;
+    cursor: pointer;
 }
 
 #title {
@@ -71,9 +77,11 @@ p {
     height: 35%;
     line-height: 2.4rem;
 }
-#time{
+
+#time {
     text-align: right;
     margin-right: 5rem;
     font-size: 12px;
-    }
+}
+
 </style>

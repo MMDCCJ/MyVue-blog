@@ -1,7 +1,7 @@
 <template>
     <div id="intro">
         <p>"{{ welcomeMsg.saying }}" --{{ welcomeMsg.speaker }}</p>
-        <a href="#me" id="toMain">
+        <a @click="anchorPoint" id="toMain" ref="toTopic">
             <p class="el-icon-bottom float-element"></p>
         </a>
     </div>
@@ -26,7 +26,27 @@ export default {
                 msg = msg[id];
             }
             return msg
+        },
+
+    },
+    methods: {
+        // 去文章页
+        toTopic() {
+            this.$refs.toTopic.click();
+        },
+        anchorPoint() {
+            this.$nextTick(() => {
+                console.log(this.$route.name);
+                if (this.$route.name === "main") {
+                    document.querySelector("#me")?.scrollIntoView(true);
+                }else if(this.$route.name === "article"){
+                    document.querySelector(".container")?.scrollIntoView(true);
+                }
+            })
         }
+    },
+    mounted() {
+        this.$bus.$on("toTopic", this.toTopic)
     }
 };
 </script>
@@ -44,6 +64,10 @@ p {
     color: white;
     opacity: 0.8;
     font-size: 35px;
+}
+
+a {
+    cursor: pointer;
 }
 
 /* 箭头上下浮动动画效果 */
@@ -65,7 +89,7 @@ p {
     animation: float-up-down 1.65s infinite;
 }
 
-@media screen and (max-width:1700px) {
+@media screen and (max-width:1570px) {
     #intro {
         height: 40rem;
     }
