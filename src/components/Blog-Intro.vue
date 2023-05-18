@@ -37,6 +37,7 @@ export default {
         anchorPoint() {
             this.$nextTick(() => {
                 console.log(this.$route.name);
+                console.log(this.$route);
                 if (this.$route.name === "main") {
                     document.querySelector("#me")?.scrollIntoView(true);
                 }else if(this.$route.name === "article"){

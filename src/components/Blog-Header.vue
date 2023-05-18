@@ -3,7 +3,7 @@
     <el-col :span="24">
       <el-menu :default-active="activeIndex" mode="horizontal" id="TopNavicate">
         <el-menu-item index="1" @click="toTopic">
-          <router-link :to="{ name: 'main' }">主 页</router-link>
+          <a>主 页</a>
         </el-menu-item>
         <el-menu-item index="2" @click="toArticlePage">
           <a> 其 他 </a>
@@ -23,10 +23,20 @@ export default {
   },
   methods: {
     toTopic() {
-      this.$bus.$emit("toTopic")
+      this.toMain()
+      this.$nextTick(() => {
+        this.$bus.$emit("toTopic")
+      })
+    },
+    toMain() {
+      if (this.$route.name !== "main") {
+        this.$router.push({
+          name: 'main',
+        })
+      }
     },
     toArticlePage() {
-      console.log(this.$route);
+      // 路由到文章 暂时测试用
       let id = 1;
       if (this.$route.name !== "article") {
         this.$router.push({
