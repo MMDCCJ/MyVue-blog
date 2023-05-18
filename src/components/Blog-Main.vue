@@ -1,6 +1,10 @@
 <template>
    <div id="maincontainer">
       <B_article/>
+      <B_article/>
+      <B_article/>
+      <B_article/>
+      <B_article/>
    </div>
 </template>
 <script>

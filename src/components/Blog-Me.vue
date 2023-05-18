@@ -1,5 +1,5 @@
 <template>
-    <div id="me">
+    <div id="me" ref="me">
         <div id="top">
             <h1>MMDCCJ</h1>
             <p>我站在你左侧，却像隔着银河</p>
@@ -42,7 +42,7 @@ export default {
                 }
             });
         }
-    }
+    },
 };
 </script>
 <style lang='css' scoped>

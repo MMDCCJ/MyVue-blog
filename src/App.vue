@@ -13,6 +13,7 @@
         <B_footer/>
       </el-footer>
     </el-container>
+    <el-backtop  :visibility-height="500"></el-backtop>
   </div>
 </template>
 
@@ -66,4 +67,5 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
 </style>
