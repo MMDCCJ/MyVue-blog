@@ -27,7 +27,7 @@ export default {
    },
    methods:{
       toOtherPages(){
-
+         this.artList = JSON.parse(localStorage.getItem('pages'))
       }
    },
    components: {

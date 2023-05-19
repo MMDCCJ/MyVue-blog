@@ -23,13 +23,6 @@ export default {
         "lastUpdateTime",
         "artID"
     ],
-    
-    computed: {
-
-    },
-    watch: {
-
-    },
     mounted() {
     },
     methods: {

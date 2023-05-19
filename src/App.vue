@@ -26,6 +26,7 @@
 import B_Header from './components/Blog-Header.vue'
 import B_Intro from './components/Blog-Intro.vue'
 import B_footer from './components/Blog-footer.vue'
+import axios from 'axios'
 export default {
   name: 'App',
   components: {
@@ -34,16 +35,32 @@ export default {
     B_footer
   },
   methods: {
+    // 更新页面
     updatePages(page) {
-      console.log(page);
-      // this.$http.get('http://www.mmdccj.xyz/api/article/overview',{page}).then(
-      //   function(res){
-      //     localStorage.setItem("pages",JSON.stringify(res.body.data))
-      //   },
-      //   function(error){
-      //     console.log(error);
-      //   }
-      // )
+      axios({
+        method: 'GET',
+        url: 'http://www.mmdccj.xyz/api/article/overview',
+        params: { page }
+      }).then((res) => {
+        if (res.data.code === 200) {
+          localStorage.setItem("pages", JSON.stringify(res.data.data))
+        } else {
+          localStorage.setItem("pages", JSON.stringify([{
+            ID: 0,
+            firstUpdateDate: '1145-1-4',
+            lastUpdateDate: '1145-1-4',
+            title: '没有这么多文章喵',
+            articleBody: '没有这么多文章喵',
+            isDelete:'N',
+            author:'MMDCCJ'
+
+          }]))
+        }
+        this.$bus.$emit('toOtherPages')
+      },
+        function (error) {
+          console.log(error);
+        })
     }
   },
   created() {
@@ -77,7 +94,7 @@ export default {
     }
   },
   mounted() {
-    // this.$bus.$on("updatePages", this.updatePages)
+    this.$bus.$on("updatePages", this.updatePages)
   }
 }
 </script>

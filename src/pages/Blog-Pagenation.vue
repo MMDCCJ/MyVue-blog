@@ -2,7 +2,8 @@
     <div>
         <el-row>
             <el-col>
-                <el-pagination background :current-page="page" layout="prev, pager, next" :total="1000">
+                <el-pagination background @current-change="pageChange" :current-page="pages" layout="prev, pager, next"
+                    :total="1000">
                 </el-pagination>
             </el-col>
         </el-row>
@@ -13,22 +14,18 @@ export default {
     name: 'blog_pageNation',
     data() {
         return {
-            page: 1
+            pages: 1
+        }
+    }, methods: {
+        pageChange(newValue) {
+            this.$bus.$emit("updatePages", newValue)
+            localStorage.setItem('pageIndex',newValue)
         }
     },
-    computed: {
-
-    },
-    // watch: {
-    //     // activePage(newValue){
-    //     //     this.$bus.$emit("updatePages",newValue)
-    //     // }
-    // },
     mounted() {
-
-    },
-    methods: {
-
+        if (localStorage.getItem('pageIndex')) {
+            this.pages = Number(localStorage.getItem('pageIndex'))
+        }
     }
 };
 </script>

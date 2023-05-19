@@ -23,8 +23,8 @@ export default {
     },
     data() {
         return {
-            artId:'0',
-            loading:'现在正在加载中'
+            artId: '0',
+            loading: '现在正在加载中'
         }
     },
     computed: {
@@ -35,18 +35,23 @@ export default {
     },
     mounted() {
         this.artId = this.$route.params.id;
-        this.$http.get('http://www.mmdccj.xyz/api/article/content',{
-            id:this.artId
-        }).then(
-            (res)=>{
-                this.loading = ''
-                this.$refs.articleContainer.innerHTML = ""
-                console.log(res.data);
-            },
-            (error)=>{
-                alert(error.message)
-            }
-        )
+        if (this.artId !== 0) {
+            this.$http.get('http://www.mmdccj.xyz/api/article/content', {
+                id: this.artId
+            }).then(
+                (res) => {
+                    res;
+                    this.loading = ''
+                    this.$refs.articleContainer.innerHTML = "现在还看不到具体的文章喵"
+                },
+                (error) => {
+                    alert(error.message)
+                }
+            )
+        }else{
+            console.log("错误的id");
+        }
+
     },
     methods: {
 
@@ -78,4 +83,5 @@ ul {
     border: 1px solid white;
     text-align: center;
     padding: 0;
-}</style>
+}
+</style>
