@@ -111,7 +111,6 @@ export default {
     },
     mounted() {
         const draftData = JSON.parse(localStorage.getItem('draft'));
-        console.log(draftData);
         if (draftData) {
             this.articleData.title = draftData.title;
             this.articleData.textarea = draftData.textarea;
@@ -121,7 +120,7 @@ export default {
     },
     methods: {
         upload() {
-            console.log("提交了文章");
+            this.$http.post("http://www.mmdccj.xyz/api/writing")
         },
         // 以下两个方法为建议框需要的方法
         querySearch(queryString, cb) {
