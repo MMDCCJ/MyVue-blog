@@ -9,7 +9,6 @@
 <script>
 export default {
     name: 'Blog-intro',
-
     computed: {
         welcomeMsg() {
             let msg = JSON.parse(localStorage.getItem('sayings'));
@@ -34,6 +33,7 @@ export default {
         toTopic() {
             this.$refs.toTopic.click();
         },
+        // 跳转
         anchorPoint() {
             this.$nextTick(() => {
                 console.log(this.$route.name);
@@ -42,11 +42,14 @@ export default {
                     document.querySelector("#me")?.scrollIntoView(true);
                 }else if(this.$route.name === "article"){
                     document.querySelector(".container")?.scrollIntoView(true);
+                }else if(this.$route.name ==="editing"){
+                    document.querySelector(".container")?.scrollIntoView(true);
                 }
             })
         }
     },
     mounted() {
+        // 触发快捷跳转时间
         this.$bus.$on("toTopic", this.toTopic)
     }
 };

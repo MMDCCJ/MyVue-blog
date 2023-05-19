@@ -42,13 +42,13 @@ export default {
       });
     }
     // 获取全部文章
-    this.$http.get("127.0.0.1/api/article/overview",{
-      page:1
-    }).then(function(res){
-      console.log(res.body.data);
-    },function(error){
-      console.log("请求失败",error);
-    })
+    // this.$http.get("127.0.0.1/api/article/overview",{
+    //   page:1
+    // }).then(function(res){
+    //   console.log(res.body.data);
+    // },function(error){
+    //   console.log("请求失败",error);
+    // })
   }
   ,
   data() {
