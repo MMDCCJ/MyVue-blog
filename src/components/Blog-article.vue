@@ -1,14 +1,13 @@
 <template>
-    <div id="container" @click="toArticle" >
+    <div id="container" @click="toArticle">
         <div id="title">
-            <h1>测试文章</h1>
+            <h1>{{ title }}</h1>
         </div>
-        <!-- <img src="../../public/main.jpg" alt=""> -->
         <div id="preview">
-            <p>这现在是一段可以跳转的文本</p>
+            <p>{{ body }}</p>
         </div>
 
-        <p id="time">发布事件&nbsp; 2022-03-05 &nbsp;最后更新时间&nbsp; 2023-01-11</p>
+        <p id="time">发布事件&nbsp; {{updateTime}} &nbsp;最后更新时间&nbsp; {{lastUpdateTime}}</p>
     </div>
 </template>
 <script>
@@ -17,14 +16,14 @@ export default {
     components: {
 
     },
-    props: {
-
-    },
-    data() {
-        return {
-            id:1
-        }
-    },
+    props: [
+        "title",
+        "body",
+        "updateTime",
+        "lastUpdateTime",
+        "artID"
+    ],
+    
     computed: {
 
     },
@@ -32,7 +31,6 @@ export default {
 
     },
     mounted() {
-
     },
     methods: {
         toArticle() {
@@ -40,7 +38,7 @@ export default {
             this.$router.push({
                 name: 'article',
                 params: {
-                    id:this.id
+                    id: this.artID
                 }
             })
         }
@@ -83,5 +81,4 @@ p {
     margin-right: 5rem;
     font-size: 12px;
 }
-
 </style>

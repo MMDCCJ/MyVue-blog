@@ -6,18 +6,19 @@
       </el-header>
       <el-main>
         <B_Intro />
-        <router-view name="me"/>
-        <router-view name="main"/>
-        <router-view name="article"/>
-        <router-view name="editing"/>
+        <router-view name="me" />
+        <router-view name="main" />
+        <router-view name="article" />
+        <router-view name="editing" />
+        <router-view name="pageNation" />
         <!-- <B_Main /> -->
       </el-main>
       <el-footer>
-        <B_footer/>
+        <B_footer />
       </el-footer>
     </el-container>
     <!-- toTop -->
-    <el-backtop :visibility-height="500"></el-backtop> 
+    <el-backtop :visibility-height="500"></el-backtop>
   </div>
 </template>
 
@@ -32,15 +33,34 @@ export default {
     B_Intro,
     B_footer
   },
+  methods: {
+    updatePages(page) {
+      console.log(page);
+      // this.$http.get('http://www.mmdccj.xyz/api/article/overview',{page}).then(
+      //   function(res){
+      //     localStorage.setItem("pages",JSON.stringify(res.body.data))
+      //   },
+      //   function(error){
+      //     console.log(error);
+      //   }
+      // )
+    }
+  },
   created() {
     // 获取名言
     if (!localStorage.getItem("sayings")) {
       this.$http.get('http://www.mmdccj.xyz/api/sayings').then(function (res) {
         localStorage.setItem("sayings", JSON.stringify(res.body.data));
       }, function (error) {
-        console.log('请求失败',error);
+        console.log('请求失败', error);
       });
     }
+    this.$http.get('http://www.mmdccj.xyz/api/article/overview?page=1').then(
+      function (res) {
+        localStorage.setItem("pages", JSON.stringify(res.body.data))
+      }
+    )
+
     // 获取全部文章
     // this.$http.get("127.0.0.1/api/article/overview",{
     //   page:1
@@ -56,7 +76,8 @@ export default {
       radio: '1'
     }
   },
-  mounted(){
+  mounted() {
+    // this.$bus.$on("updatePages", this.updatePages)
   }
 }
 </script>
@@ -77,5 +98,4 @@ body {
 html {
   scroll-behavior: smooth;
 }
-
 </style>

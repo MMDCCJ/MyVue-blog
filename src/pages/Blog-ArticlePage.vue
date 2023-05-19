@@ -6,9 +6,8 @@
             </ul>
         </el-aside>
         <el-main>
-            <article class="article-main">
-                <h1>第一个测试文章</h1>
-                <p>这是测试段落,还处于装修阶段，预计完工时间不详</p>
+            <article ref="articleContainer" class="article-main">
+                {{ loading }}
             </article>
         </el-main>
     </el-container>
@@ -24,7 +23,8 @@ export default {
     },
     data() {
         return {
-
+            artId:'0',
+            loading:'现在正在加载中'
         }
     },
     computed: {
@@ -34,7 +34,19 @@ export default {
 
     },
     mounted() {
-
+        this.artId = this.$route.params.id;
+        this.$http.get('http://www.mmdccj.xyz/api/article/content',{
+            id:this.artId
+        }).then(
+            (res)=>{
+                this.loading = ''
+                this.$refs.articleContainer.innerHTML = ""
+                console.log(res.data);
+            },
+            (error)=>{
+                alert(error.message)
+            }
+        )
     },
     methods: {
 

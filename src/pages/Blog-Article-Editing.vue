@@ -11,13 +11,22 @@
                 </el-select>
             </transition>
             <transition>
-                <el-input v-if="newEdit === '2'" class="IDInput" type="text" :placeholder="inputTips" v-model="articleData.text"
-                    maxlength="10" show-word-limit>
+                <el-input v-if="newEdit === '2'" class="IDInput" type="text" :placeholder="inputTips"
+                    v-model="articleData.text" maxlength="10" show-word-limit>
                 </el-input>
             </transition>
         </div>
-        <el-input class="articleInput" type="text" placeholder="请输入标题" v-model="articleData.title" maxlength="50" show-word-limit>
+        <el-input class="articleInput" type="text" placeholder="请输入标题" v-model="articleData.title" maxlength="50"
+            show-word-limit>
         </el-input>
+        <div class="contentInput">
+            <h2>文章梗概</h2>
+        </div>
+        <el-row>
+            <el-input type="text" placeholder="请输入文章梗概" v-model="articleData.about" maxlength="50" show-word-limit
+                :span="24">
+            </el-input>
+        </el-row>
         <div class="contentInput">
             <h2>文章主体</h2>
         </div>
@@ -56,6 +65,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
     name: 'Article-Editing',
     data() {
@@ -65,6 +75,7 @@ export default {
                 typeData: '',
                 textarea: '',
                 author: '',
+                about: ''
             },
             type: [
                 { value: '代码类' },
@@ -101,9 +112,9 @@ export default {
                 this.radioClass = "radioOut";
             }
         },
-        articleData:{
-            deep:true,
-            handler(newObj){
+        articleData: {
+            deep: true,
+            handler(newObj) {
                 this.$refs.miniArticle.innerHTML = newObj.textarea;
                 this.save();
             }
@@ -116,11 +127,32 @@ export default {
             this.articleData.textarea = draftData.textarea;
             this.articleData.typeData = draftData.typeData;
             this.articleData.author = draftData.author;
+            this.articleData.about = draftData.about;
         }
     },
     methods: {
+        // http://www.mmdccj.xyz/api/writing
         upload() {
-            this.$http.post("http://www.mmdccj.xyz/api/writing")
+            const dataObj = {
+                title: this.articleData.title,
+                articleType: this.articleData.typeData,
+                articleMain: this.articleData.textarea,
+                articleBody: this.articleData.about,
+                author: this.articleData.author
+            }
+            const options = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                data: dataObj,
+                url:'http://127.0.0.1/api/writing',
+            }
+            axios(options).then((res)=>{
+                console.log(res);
+            },(error)=>{
+                console.log(error.message);
+            })
         },
         // 以下两个方法为建议框需要的方法
         querySearch(queryString, cb) {
@@ -140,7 +172,8 @@ export default {
                 title: this.articleData.title,
                 textarea: this.articleData.textarea,
                 typeData: this.articleData.typeData,
-                author: this.articleData.author
+                author: this.articleData.author,
+                about: this.articleData.about
             }
             localStorage.setItem('draft', JSON.stringify(data));
         }
