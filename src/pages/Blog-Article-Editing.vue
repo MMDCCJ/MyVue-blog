@@ -2,19 +2,26 @@
     <div class="container">
         <div class="titleEdit">
             <h2>标题</h2>
-            <el-radio :class="radioClass" key="1" v-model="newEdit" label="1" border>新文章</el-radio>
-            <el-radio :class="radioClass" key="2" v-model="newEdit" label="2" border>修改旧文</el-radio>
+            <el-radio class="radioClass" key="1" v-model="newEdit" label="1" border>新文章</el-radio>
+            <el-radio class="radioClass" key="2" v-model="newEdit" label="2" border>修改旧文</el-radio>
+            <!-- 查询方式 -->
             <transition>
                 <el-select v-if="newEdit === '2'" class="SelectInput" v-model="value" placeholder="请选择">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
             </transition>
+            <!-- 搜索按钮 -->
+            <transition>
+                <el-button @click="search" v-if="newEdit === '2'" class="serachBtn" icon="el-icon-search"
+                    circle></el-button>
+            </transition>
             <transition>
                 <el-input v-if="newEdit === '2'" class="IDInput" type="text" :placeholder="inputTips"
                     v-model="articleData.text" maxlength="10" show-word-limit>
                 </el-input>
             </transition>
+
         </div>
         <el-input class="articleInput" type="text" placeholder="请输入标题" v-model="articleData.title" maxlength="50"
             show-word-limit>
@@ -31,7 +38,7 @@
             <h2>文章主体</h2>
         </div>
         <div class="textAreaContainer">
-            <el-input class="textArea" type="textarea" :autosize="{ minRows: 10, maxRows: 50 }" placeholder="请输入内容"
+            <el-input class="textArea" type="textarea" :autosize="{ minRows: 20, maxRows: 100 }" placeholder="请输入内容"
                 v-model="articleData.textarea">
             </el-input>
             <div ref="miniArticle" class="miniArticle"></div>
@@ -52,14 +59,12 @@
             </el-col>
         </el-row>
         <el-row class="btns">
-            <el-col :span="2">
+            <el-col :span="8">
                 <el-popconfirm @confirm="upload" class="commitBtn" confirm-button-text='好的' cancel-button-text='稍后'
                     icon="el-icon-question" icon-color="#66ccff" title="确定上传当前内容吗？">
                     <el-button slot="reference">上传</el-button>
                 </el-popconfirm>
-            </el-col>
-            <el-col :span="2">
-                <el-button type="primary" @click="save">保存草稿</el-button>
+                <el-button type="primary" @click="save" class="saveDraft">保存草稿</el-button>
             </el-col>
         </el-row>
     </div>
@@ -92,7 +97,6 @@ export default {
                 label: '标题查询'
             }],
             value: 'id',
-            radioClass: ''
         }
     },
     computed: {
@@ -100,18 +104,12 @@ export default {
             if (this.value === 'id') {
                 return "请输入id"
             } else {
-                return "请输入标题"
+                return "请输入标题，还在做"
             }
         }
     },
     watch: {
-        newEdit(newValue) {
-            if (newValue === "2") {
-                this.radioClass = "radioMove";
-            } else {
-                this.radioClass = "radioOut";
-            }
-        },
+
         articleData: {
             deep: true,
             handler(newObj) {
@@ -132,6 +130,12 @@ export default {
     },
     methods: {
         // http://www.mmdccj.xyz/api/writing
+        search() {
+            axios({
+                method:'GET',
+                url:''
+            })
+        },
         upload() {
             const dataObj = {
                 title: this.articleData.title,
@@ -146,11 +150,11 @@ export default {
                     'content-type': 'application/x-www-form-urlencoded'
                 },
                 data: dataObj,
-                url:'http://127.0.0.1/api/writing',
+                url: 'http://www.mmdccj.xyz/api/writing',
             }
-            axios(options).then((res)=>{
+            axios(options).then((res) => {
                 console.log(res);
-            },(error)=>{
+            }, (error) => {
                 console.log(error.message);
             })
         },
@@ -181,6 +185,18 @@ export default {
 };
 </script>
 <style lang='css' scoped>
+.radioClass {
+    margin-right: 0.8rem;
+}
+
+.serachBtn {
+    margin-right: 0.5rem;
+}
+
+.saveDraft {
+    margin-left: 3rem;
+}
+
 .btns {
     margin-top: 2rem;
 }
@@ -280,7 +296,7 @@ export default {
 
 .SelectInput {
     width: 15%;
-    margin-right: 2rem;
+    margin-right: 1rem;
 }
 
 .container {
@@ -311,5 +327,4 @@ h2 {
 
 .articleInput {
     margin-bottom: 1rem;
-}
-</style>
+}</style>
