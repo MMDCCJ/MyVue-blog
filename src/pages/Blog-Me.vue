@@ -46,39 +46,28 @@ export default {
 };
 </script>
 <style lang='css' scoped>
-#me {
-    width: 55rem;
-    height: 15rem;
-    /* border: 1px solid white; */
-    margin: 4rem auto 5rem;
-    display: flex;
-    flex-direction: column;
+#top {
+    text-align: center;
 }
 
-#top {
-    flex: 7;
-    box-sizing: border-box;
+#me {
+    width: 45vw;
+    height: 10vw;
+    /* border: 1px solid white; */
+    margin: 4vh auto 3vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
 }
 
 #contact {
-    margin-left: 5rem;
-    flex: 3;
-}
-
-#contact>a {
-    margin-right: 2rem;
+    margin: auto;
+    display: flex;
 }
 
 #github {
     color: white;
-
-}
-
-h1 {
-    margin-left: 5rem;
-    color: white;
-    font-size: 29px;
-    margin-bottom: 2.5rem;
+    margin: 0 25px;
 }
 
 i {
@@ -87,8 +76,11 @@ i {
 }
 
 p {
-    margin-left: 5rem;
-    color: gray;
-    font-size: 19px;
+    color: white;
+    font-size: 1.8vh;
+}
+h1{
+    color: white;
+    font-size: 3.2vh;
 }
 </style>

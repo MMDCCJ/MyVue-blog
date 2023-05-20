@@ -1,7 +1,7 @@
 <template>
     <div id="container" @click="toArticle">
         <div id="title">
-            <h1>{{ title }}</h1>
+            <h2>{{ title }}</h2>
         </div>
         <div id="preview">
             <p>{{ body }}</p>
@@ -42,22 +42,36 @@ export default {
 img {
     height: 50px;
 }
-
-#container {
-    background-color: #181614;
-    margin: 0rem auto;
-    width: 55rem;
-    height: 15rem;
-    box-sizing: border-box;
-    color: white;
+#container:hover{
+    filter: brightness(1.3);
+    cursor: pointer;
 }
+#container {
+    background-color: #130f0c;
+    color: white;
+    width: 55vh;
+    height: 20vh;
+    /* border: 1px solid white; */
+    margin: 10vh auto 7vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    box-shadow:8px 8px 10px black;
 
-h1,
+}
+p{
+    font-size: 18px;
+    margin-top: 35px;
+}
+h2,
 p {
     margin-left: 5rem;
     cursor: pointer;
 }
-
+h2{
+    margin: 0,0;
+    font-size: 25px;
+}
 #title {
     height: 30%;
     line-height: 6.3rem;
@@ -71,7 +85,8 @@ p {
 
 #time {
     text-align: right;
-    margin-right: 5rem;
+    margin-right: 3.2vh;
     font-size: 12px;
+    margin-top: 38px;
 }
 </style>
