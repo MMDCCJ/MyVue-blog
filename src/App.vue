@@ -53,7 +53,6 @@ export default {
             articleBody: '没有这么多文章喵',
             isDelete:'N',
             author:'MMDCCJ'
-
           }]))
         }
         this.$bus.$emit('toOtherPages')
@@ -72,20 +71,18 @@ export default {
         console.log('请求失败', error);
       });
     }
-    this.$http.get('http://www.mmdccj.xyz/api/article/overview?page=1').then(
+    let loadPage = 1;
+    // 初次获取所有文章的overview
+    if(localStorage.getItem('pageIndex')){
+      loadPage = localStorage.getItem('pageIndex');
+    }
+    this.$http.get(`http://www.mmdccj.xyz/api/article/overview?page=${loadPage}`).then(
       function (res) {
         localStorage.setItem("pages", JSON.stringify(res.body.data))
+        // 防止这个api的请求慢于网页加载
+        this.$bus.$emit("pagesReload")
       }
     )
-
-    // 获取全部文章
-    // this.$http.get("127.0.0.1/api/article/overview",{
-    //   page:1
-    // }).then(function(res){
-    //   console.log(res.body.data);
-    // },function(error){
-    //   console.log("请求失败",error);
-    // })
   }
   ,
   data() {
@@ -93,12 +90,12 @@ export default {
       radio: '1'
     }
   },
+  // 绑定刷新页面的事件
   mounted() {
     this.$bus.$on("updatePages", this.updatePages)
   }
 }
 </script>
-
 <style>
 #app {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;

@@ -13,6 +13,7 @@
     </el-container>
 </template>
 <script>
+import axios from 'axios';
 export default {
     name: 'Article-Page',
     components: {
@@ -36,19 +37,22 @@ export default {
     mounted() {
         this.artId = this.$route.params.id;
         if (this.artId !== 0) {
-            this.$http.get('http://www.mmdccj.xyz/api/article/content', {
-                id: this.artId
-            }).then(
-                (res) => {
-                    res;
-                    this.loading = ''
-                    this.$refs.articleContainer.innerHTML = "现在还看不到具体的文章喵"
-                },
+            axios({
+                url: 'http://www.mmdccj.xyz/api/article/content',
+                method: 'GET',
+                params: {
+                    id: this.artId
+                }
+            }).then((res) => {
+                console.log("具体文章内容", res.data.data);
+                this.loading = '';
+                this.$refs.articleContainer.innerHTML = res.data.data[0].article;
+            },
                 (error) => {
                     alert(error.message)
                 }
             )
-        }else{
+        } else {
             console.log("错误的id");
         }
 
