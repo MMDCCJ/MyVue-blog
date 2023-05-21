@@ -18,7 +18,7 @@
             </transition>
             <transition>
                 <el-input v-if="newEdit === '2'" class="IDInput" type="text" :placeholder="inputTips"
-                    v-model="articleData.text" maxlength="10" show-word-limit>
+                    v-model="articleData.idOrTitle" maxlength="10" show-word-limit>
                 </el-input>
             </transition>
 
@@ -59,12 +59,17 @@
             </el-col>
         </el-row>
         <el-row class="btns">
-            <el-col :span="8">
-                <el-popconfirm @confirm="upload" class="commitBtn" confirm-button-text='好的' cancel-button-text='稍后'
-                    icon="el-icon-question" icon-color="#66ccff" title="确定上传当前内容吗？">
+            <el-col :span="10">
+                <el-popconfirm v-if="newEdit == 1" @confirm="upload" class="commitBtn" confirm-button-text='好的'
+                    cancel-button-text='稍后' icon="el-icon-question" icon-color="#66ccff" title="确定上传当前内容吗？">
                     <el-button slot="reference">上传</el-button>
                 </el-popconfirm>
-                <el-button type="primary" @click="save" class="saveDraft">保存草稿</el-button>
+                <el-popconfirm v-if="newEdit == 2" @confirm="updateArticle" class="commitBtn" confirm-button-text='好的'
+                    cancel-button-text='稍后' icon="el-icon-question" icon-color="#66ccff" title="确定上传当前内容吗？">
+                    <el-button slot="reference">更新文章</el-button>
+                </el-popconfirm>
+                <el-button type="primary" @click="save(`btn`)" class="saveDraft">保存草稿</el-button>
+                <el-button type="primary" @click="clear">清除草稿</el-button>
             </el-col>
         </el-row>
     </div>
@@ -80,7 +85,8 @@ export default {
                 typeData: '',
                 textarea: '',
                 author: '',
-                about: ''
+                about: '',
+                idOrTitle: ''
             },
             type: [
                 { value: '代码类' },
@@ -102,19 +108,20 @@ export default {
     computed: {
         inputTips() {
             if (this.value === 'id') {
-                return "请输入id"
+                return "请输入 id"
             } else {
                 return "请输入标题，还在做"
             }
         }
     },
     watch: {
-
         articleData: {
             deep: true,
             handler(newObj) {
                 this.$refs.miniArticle.innerHTML = newObj.textarea;
-                this.save();
+                if (this.newEdit === "1") {
+                    this.save();
+                }
             }
         },
     },
@@ -129,13 +136,81 @@ export default {
         }
     },
     methods: {
+        // 清除草稿
+        clear() {
+            localStorage.removeItem('draft')
+            for (let item in this.articleData) {
+                this.articleData[item] = ""
+            }
+            this.$message({
+                message: '清除草稿成功',
+                type: 'success'
+            });
+        },
+        // 更新文章
+        updateArticle() {
+            const data = {
+                title: this.articleData.title,
+                article: this.articleData.textarea,
+                articleType: this.articleData.typeData,
+                author: this.articleData.author,
+                articleBody: this.articleData.about
+            }
+            if (this.newEdit === '2') {
+                data['id'] = this.articleData.idOrTitle
+            }
+
+            axios({
+                method: 'POST',
+                url: 'http://www.mmdccj.xyz/api/updateArticle',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                data
+            }).then((res) => {
+                res
+                this.$message({
+                    message:'修改文章成功',
+                    type:'success'
+                })
+            },
+                (error) => {
+                    console.log(error.message);
+                })
+        },
+        // 查找待修改的文章
         // http://www.mmdccj.xyz/api/writing
         search() {
+            if (this.articleData.idOrTitle === "") {
+                return this.$message({
+                    message: '请输入有效的字符',
+                    type: 'warning'
+                });
+            }
             axios({
-                method:'GET',
-                url:''
-            })
+                method: 'GET',
+                url: 'http://www.mmdccj.xyz/api/writing/updateData',
+                params: {
+                    id: this.articleData.idOrTitle
+                }
+            }).then((res) => {
+
+                const data = res.data.data[0]
+                this.articleData.title = data.title
+                this.articleData.about = data.articleBody
+                this.articleData.author = data.author
+                this.articleData.textarea = data.article
+                this.articleData.typeData = data.articleType
+                this.$message({
+                    message: `成功查询到标题${this.articleData.title}的文章`,
+                    type: 'success'
+                })
+            },
+                (error) => {
+                    alert(error.message)
+                })
         },
+        // 上传新文章
         upload() {
             const dataObj = {
                 title: this.articleData.title,
@@ -143,6 +218,13 @@ export default {
                 articleMain: this.articleData.textarea,
                 articleBody: this.articleData.about,
                 author: this.articleData.author
+            }
+            for (const item in dataObj) {
+                if (dataObj[item].trim() === '') {
+                    return this.$message(
+                        { message: `${item}不能为空`, type: 'error' }
+                    )
+                }
             }
             const options = {
                 method: 'POST',
@@ -153,7 +235,11 @@ export default {
                 url: 'http://www.mmdccj.xyz/api/writing',
             }
             axios(options).then((res) => {
-                console.log(res);
+                res
+                this.$message({
+                    message: '上传文章成功',
+                    type: 'success'
+                });
             }, (error) => {
                 console.log(error.message);
             })
@@ -171,7 +257,7 @@ export default {
             };
         },
         // 保存草稿
-        save() {
+        save(msg) {
             const data = {
                 title: this.articleData.title,
                 textarea: this.articleData.textarea,
@@ -180,6 +266,12 @@ export default {
                 about: this.articleData.about
             }
             localStorage.setItem('draft', JSON.stringify(data));
+            if (msg === "btn") {
+                this.$message({
+                    message: '保存草稿成功',
+                    type: 'success'
+                });
+            }
         }
     }
 };
@@ -327,4 +419,5 @@ h2 {
 
 .articleInput {
     margin-bottom: 1rem;
-}</style>
+}
+</style>

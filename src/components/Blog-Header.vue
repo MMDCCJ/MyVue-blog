@@ -5,8 +5,8 @@
         <el-menu-item index="3" @click="toEditing">
           <a> 文 章 编 辑 </a>
         </el-menu-item>
-        <el-menu-item index="2" @click="toArticlePage">
-          <a> 其 他 </a>
+        <el-menu-item index="2" @click="toAdmin">
+          <a> 管 理 </a>
         </el-menu-item>
         <el-menu-item index="1" @click="toTopic">
           <a>主 页</a>
@@ -27,7 +27,7 @@ export default {
     const routeName = this.$route.name;
     if (routeName === "main") {
       this.activeIndex = "1";
-    }else if(routeName === "editing"){
+    } else if (routeName === "editing") {
       this.activeIndex = "3";
     }
   },
@@ -59,18 +59,21 @@ export default {
         })
       }
     },
-    toArticlePage() {
-      // 路由到文章 暂时测试用
-      let id = 1;
-      if (this.$route.name !== "article") {
-        this.$router.push({
-          name: 'article',
-          params: {
-            id
-          }
-        })
-      }
+    toAdmin() {
+      this.$message({ message: '开发ing', type: 'warning' })
     }
+    // toArticlePage() {
+    //   // 路由到文章 暂时测试用
+    //   let id = 1;
+    //   if (this.$route.name !== "article") {
+    //     this.$router.push({
+    //       name: 'article',
+    //       params: {
+    //         id
+    //       }
+    //     })
+    //   }
+    // }
   }
 }
 </script>
