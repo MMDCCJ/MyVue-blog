@@ -102,10 +102,18 @@ export default {
 
 }
 body {
+  /* 网页的背景色 */
+  /* #66ccff */
   background-color: #130f0c;
 }
 
 html {
   scroll-behavior: smooth;
 }
+
+</style>
+<style lang="css" scoped>
+  .el-main{
+    padding: 0;
+  }
 </style>

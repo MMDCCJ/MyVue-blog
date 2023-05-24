@@ -81,7 +81,8 @@ export default {
 <style scoped>
 #TopNavicate {
   opacity: 0.5;
-  background-color: #0C1014 !important;
+  /* background-color: #3380ff !important; */
+  background-color: #130f0c;
   border-bottom: 0;
 }
 

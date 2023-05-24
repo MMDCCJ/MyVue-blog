@@ -65,6 +65,8 @@ export default {
     background-size: cover;
     width: 100%;
     height: 80vh;
+    border-radius: 5px;
+    padding: 0;
 }
 
 .sloganBox {

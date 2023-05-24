@@ -49,44 +49,46 @@ img {
 #container {
     background-color: #130f0c;
     color: white;
-    width: 55vh;
-    height: 20vh;
+    width: 32%;
+    height: 20%;
     /* border: 1px solid white; */
-    margin: 10vh auto 7vh;
+    margin: 4% auto 4%;
     display: flex;
     flex-direction: column;
     border-radius: 40px;
-    box-shadow:8px 8px 10px black;
+    box-shadow:6px 6px 10px black;
 
 }
 p{
     font-size: 18px;
-    margin-top: 35px;
+    margin-top: 2%;
+    /* margin-top: 35px; */
 }
 h2,
 p {
-    margin-left: 5rem;
+    margin-left: 10%;
     cursor: pointer;
 }
 h2{
     margin: 0,0;
+    margin-top:10%;
     font-size: 25px;
 }
 #title {
     height: 30%;
-    line-height: 6.3rem;
+    line-height: 50%;
     font-size: 21px;
 }
 
 #preview {
     height: 35%;
-    line-height: 2.4rem;
+    /* line-height: 2.4rem; */
 }
 
 #time {
     text-align: right;
-    margin-right: 3.2vh;
-    font-size: 12px;
-    margin-top: 38px;
+    margin-right: 10%;
+    font-size: 10px;
+    margin-bottom: 6%;
 }
 </style>
