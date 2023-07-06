@@ -43,6 +43,7 @@ export default {
                 url: 'http://www.mmdccj.xyz/api/article/content',
                 method: 'GET',
                 params: {
+                    type:"id",
                     id: this.artId
                 }
             }).then((res) => {
