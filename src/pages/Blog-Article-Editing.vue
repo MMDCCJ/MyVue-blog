@@ -13,8 +13,8 @@
             </transition>
             <!-- 搜索按钮 -->
             <transition>
-                <el-button @click="search" v-if="newEdit === '2'" class="serachBtn" icon="el-icon-search"
-                    circle></el-button>
+                <el-button @keydown.enter="search" @click="search" v-if="newEdit === '2'" class="searchBtn"
+                    icon="el-icon-search" circle></el-button>
             </transition>
             <transition>
                 <el-input v-if="newEdit === '2'" class="IDInput" type="text" :placeholder="inputTips"
@@ -23,6 +23,7 @@
             </transition>
 
         </div>
+        <!-- 按标题查询 -->
         <el-input class="articleInput" type="text" placeholder="请输入标题" v-model="articleData.title" maxlength="50"
             show-word-limit>
         </el-input>
@@ -102,6 +103,7 @@ export default {
                 value: 'title',
                 label: '标题查询'
             }],
+            // 查询方式 id-title
             value: 'id',
         }
     },
@@ -110,11 +112,12 @@ export default {
             if (this.value === 'id') {
                 return "请输入 id"
             } else {
-                return "请输入标题，还在做"
+                return "请输入标题"
             }
         }
     },
     watch: {
+        // 实时更新草稿
         articleData: {
             deep: true,
             handler(newObj) {
@@ -159,7 +162,6 @@ export default {
             if (this.newEdit === '2') {
                 data['id'] = this.articleData.idOrTitle
             }
-
             axios({
                 method: 'POST',
                 url: 'http://www.mmdccj.xyz/api/updateArticle',
@@ -167,11 +169,10 @@ export default {
                     'content-type': 'application/x-www-form-urlencoded'
                 },
                 data
-            }).then((res) => {
-                res
+            }).then(() => {
                 this.$message({
-                    message:'修改文章成功',
-                    type:'success'
+                    message: '修改文章成功',
+                    type: 'success'
                 })
             },
                 (error) => {
@@ -187,14 +188,27 @@ export default {
                     type: 'warning'
                 });
             }
-            axios({
-                method: 'GET',
-                url: 'http://www.mmdccj.xyz/api/writing/updateData',
-                params: {
-                    id: this.articleData.idOrTitle
-                }
-            }).then((res) => {
-
+            let instance;
+            if (this.value == "id") {
+                instance = new axios({
+                    method: 'GET',
+                    url: 'http://www.mmdccj.xyz/api/writing/updateData',
+                    params: {
+                        type:"id",
+                        id: this.articleData.idOrTitle
+                    }
+                })
+            } else {
+                instance = new axios({
+                    method: 'GET',
+                    url: 'http://www.mmdccj.xyz/api/writing/updateData',
+                    params: {
+                        type:"title",
+                        title: this.articleData.idOrTitle
+                    }
+                })
+            }
+            instance.then((res) => {
                 const data = res.data.data[0]
                 this.articleData.title = data.title
                 this.articleData.about = data.articleBody
@@ -209,6 +223,7 @@ export default {
                 (error) => {
                     alert(error.message)
                 })
+
         },
         // 上传新文章
         upload() {
@@ -281,7 +296,7 @@ export default {
     margin-right: 0.8rem;
 }
 
-.serachBtn {
+.searchBtn {
     margin-right: 0.5rem;
 }
 
