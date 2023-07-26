@@ -192,7 +192,7 @@ export default {
             if (this.value == "id") {
                 instance = new axios({
                     method: 'GET',
-                    url: 'http://www.mmdccj.xyz/api/writing/updateData',
+                    url: 'http://www.mmdccj.xyz/api/writing/getArticleData',
                     params: {
                         type:"id",
                         id: this.articleData.idOrTitle
@@ -201,7 +201,7 @@ export default {
             } else {
                 instance = new axios({
                     method: 'GET',
-                    url: 'http://www.mmdccj.xyz/api/writing/updateData',
+                    url: 'http://www.mmdccj.xyz/api/writing/getArticleData',
                     params: {
                         type:"title",
                         title: this.articleData.idOrTitle
@@ -210,6 +210,7 @@ export default {
             }
             instance.then((res) => {
                 const data = res.data.data[0]
+                console.log(data);
                 this.articleData.title = data.title
                 this.articleData.about = data.articleBody
                 this.articleData.author = data.author
